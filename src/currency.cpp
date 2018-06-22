@@ -10,6 +10,22 @@
 namespace std
 {
 
+ostream& operator<<(ostream& outPut, const currency& cur)
+{
+	long dollars = cur.getDollars();
+	int cents = cur.getCents();
+	signType sign = cur.getSign();
+
+	if (sign == minu)
+		outPut << "-";
+	cout << "$" << dollars << ".";
+	if (cents < 10)
+		outPut << "0";
+	outPut << cents;
+
+	return outPut;
+}
+
 currency::currency(signType sign, unsigned long dollars, unsigned long cents)
 {
 	this->setValue(sign, dollars, cents);
@@ -36,21 +52,20 @@ void currency::setValue(signType sign, unsigned long dollars,
 void std::currency::setValue(double value)
 {
 	if (value < 0)
-		amount = (long) (value - 0.001) * 100;
+		amount = (long) ((value - 0.001) * 100);
 	else
-		amount = (long) (value + 0.001) * 100;
+		amount = (long) ((value + 0.001) * 100);
 
 }
 
 unsigned int currency::getCents() const
 {
 	long value = amount;
-	long dollars;
+	long dollars = getDollars();
 	int cents;
 
 	if (value < 0)
 		value = -value;
-	dollars = (long) value / 100;
 	cents = (int) (value - dollars * 100);
 	return cents;
 }
@@ -74,7 +89,7 @@ signType currency::getSign() const
 	return sign;
 }
 
-currency currency::liAdd(currency a) const
+currency currency::operator +(currency a) const
 {
 	currency cur;
 
@@ -85,27 +100,19 @@ currency currency::liAdd(currency a) const
 	return cur;
 }
 
-currency& currency::increment(const currency& a)
+currency& currency::operator+=(const currency& a)
 {
 
-	*this = liAdd(a);
+	//*this = liAdd(a);
+	this->amount += a.amount;
 	return *this;
 }
 
 void std::currency::output() const
 {
-	long value = amount;
-	long dollars;
-	int cents;
-	signType sign;
-
-	if (value < 0)
-	{
-		value = -value;
-		sign = minu;
-	}
-	dollars = (long) value / 100;
-	cents = (int) (value - dollars * 100);
+	long dollars = getDollars();
+	int cents = getCents();
+	signType sign = getSign();
 
 	if (sign == minu)
 		cout << "-";

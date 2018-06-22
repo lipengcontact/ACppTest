@@ -18,6 +18,7 @@ enum signType{plu,minu};
 
 class currency
 {
+	friend ostream& operator<<(ostream& outPut,const currency& cur);
 private:
 	long amount;
 public:
@@ -31,13 +32,15 @@ public:
 	unsigned long getDollars() const;
 	signType getSign() const;
 
-	currency liAdd(currency a) const;
-	currency& increment(const currency& a);
+	currency operator+(currency a) const;
+	currency& operator+=(const currency& a);
 
 
 
 	void output() const;
 };
+
+
 
 } /* namespace std */
 
