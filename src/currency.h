@@ -19,9 +19,7 @@ enum signType{plu,minu};
 class currency
 {
 private:
-	signType sign;
-	unsigned long dollars;
-	unsigned int cents;
+	long amount;
 public:
 	currency(signType sign = plu,unsigned long dollars = 0,unsigned long cents = 0);
 	virtual ~currency();

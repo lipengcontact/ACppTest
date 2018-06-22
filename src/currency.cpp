@@ -12,9 +12,7 @@ namespace std
 
 currency::currency(signType sign, unsigned long dollars, unsigned long cents)
 {
-	this->sign = sign;
-	this->dollars = dollars;
-	this->cents = cents;
+	this->setValue(sign, dollars, cents);
 }
 
 currency::~currency()
@@ -22,90 +20,93 @@ currency::~currency()
 	// TODO Auto-generated destructor stub
 }
 
-
-void currency::setValue(signType signType, unsigned long unsignedLongInt,
-		unsigned int unsignedInt)
+void currency::setValue(signType sign, unsigned long dollars,
+		unsigned int cents)
 {
-	this->sign = signType;
-	this->dollars = unsignedLongInt;
-	this->cents = unsignedInt;
+	if (cents > 99)
+		throw("cents can't more than 99");
+	long value;
+	value = dollars * 100 + cents;
+	if (sign == minu)
+		value = -value;
+
+	amount = value;
 }
 
 void std::currency::setValue(double value)
 {
-	signType sign;
-	unsigned long dollars;
-	unsigned int cents;
-
-	if (value >= 0)
-	{
-		sign = plu;
-	}
+	if (value < 0)
+		amount = (long) (value - 0.001) * 100;
 	else
-	{
-		sign = minu;
-		value = -value;
-	}
-
-	dollars = (long) value;
-	cents = (int) ((value - dollars + 0.001) * 100);
-	this->setValue(sign, dollars, cents);
+		amount = (long) (value + 0.001) * 100;
 
 }
 
-
 unsigned int currency::getCents() const
 {
+	long value = amount;
+	long dollars;
+	int cents;
+
+	if (value < 0)
+		value = -value;
+	dollars = (long) value / 100;
+	cents = (int) (value - dollars * 100);
 	return cents;
 }
 
 unsigned long currency::getDollars() const
 {
+	long value = amount;
+	long dollars;
+
+	if (value < 0)
+		value = -value;
+	dollars = (long) value / 100;
 	return dollars;
 }
 
 signType currency::getSign() const
 {
+	signType sign = plu;
+	if (amount < 0)
+		sign = minu;
 	return sign;
 }
-
 
 currency currency::liAdd(currency a) const
 {
 	currency cur;
 
-	long a1, a2;
 	long value;
-	a1 = dollars * 100 + cents;
-	if (sign == minu)
-		a1 = -a1;
-	a2 = a.dollars * 100 + a.cents;
-	if (a.sign == minu)
-		a2 = -a2;
-
-	value = a1 + a2;
-	if (value < 0)
-	{
-		cur.sign = minu;
-		value = -value;
-	}
-	cur.dollars = value / 100;
-	cur.cents = value - cur.dollars * 100;
+	value = this->amount + a.amount;
+	cur.amount = value;
 
 	return cur;
 }
 
 currency& currency::increment(const currency& a)
 {
-	cout << "this:" << this << endl;
-	*this = liAdd(a);
 
+	*this = liAdd(a);
 	return *this;
 }
 
-
 void std::currency::output() const
 {
+	long value = amount;
+	long dollars;
+	int cents;
+	signType sign;
+
+	if (value < 0)
+	{
+		value = -value;
+		sign = minu;
+	}
+	dollars = (long) value / 100;
+	cents = (int) (value - dollars * 100);
+
 	if (sign == minu)
 		cout << "-";
 	cout << "$" << dollars << ".";
