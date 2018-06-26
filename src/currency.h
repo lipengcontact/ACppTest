@@ -19,10 +19,13 @@ enum signType{plu,minu};
 class currency
 {
 	friend ostream& operator<<(ostream& outPut,const currency& cur);
-private:
+protected:
 	long amount;
 public:
-	currency(signType sign = plu,unsigned long dollars = 0,unsigned long cents = 0);
+	currency();
+	currency(signType sign,unsigned long dollars,unsigned long cents);
+	currency(const currency& x);
+
 	virtual ~currency();
 
 	void setValue(signType,unsigned long,unsigned int);
@@ -32,12 +35,15 @@ public:
 	unsigned long getDollars() const;
 	signType getSign() const;
 
+
 	currency operator+(currency a) const;
 	currency& operator+=(const currency& a);
 
 
 
 	void output() const;
+//	long getAmount() const;
+//	void setAmount(long amount);
 };
 
 

@@ -28,12 +28,25 @@ ostream& operator<<(ostream& outPut, const currency& cur)
 
 currency::currency(signType sign, unsigned long dollars, unsigned long cents)
 {
+	cout<<"currency 构造函数"<<endl;
 	this->setValue(sign, dollars, cents);
+}
+
+currency::currency()
+{
+	cout<<"构造:"<<"no value"<<endl;
+	this->setValue(plu,0,0);
 }
 
 currency::~currency()
 {
 	// TODO Auto-generated destructor stub
+}
+
+std::currency::currency(const currency& x)
+{
+	cout<<"currency copy"<<endl;
+	amount = x.amount;
 }
 
 void currency::setValue(signType sign, unsigned long dollars,
@@ -89,6 +102,8 @@ signType currency::getSign() const
 	return sign;
 }
 
+
+
 currency currency::operator +(currency a) const
 {
 	currency cur;
@@ -124,5 +139,16 @@ void std::currency::output() const
 	//cout<<endl;
 }
 
+//void currency::setAmount(long amount)
+//{
+//	this->amount = amount;
+//}
+//
+//long currency::getAmount() const
+//{
+//	return amount;
+//}
+
 } /* namespace std */
+
 
