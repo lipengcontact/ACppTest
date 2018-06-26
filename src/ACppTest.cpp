@@ -12,8 +12,10 @@
 
 #include "currency.h"
 #include "EnhancedCurrency.h"
+#include "EnhancedCurrency1.h"
 
 #include "Zline.h"
+#include "Distance.h"
 
 using namespace std;
 
@@ -32,41 +34,11 @@ int main()
 {
 	cout << "test " << endl;
 
+	EnhancedCurrency1 cur;
+	cin>>cur;
+	cout<<cur<<endl;
 
 
-//	currency g,h(plu,3,50),i,j;
-//	g.setValue(minu,2,25);
-//	i.setValue(-6.45);
-//	j = h+g;
-//	h.output();
-//	cout<<"+";
-//	g.output();
-//	cout<<"=";
-//	j.output();
-//	cout<<endl;
-//
-//	currency & t = i+=h;
-//	i.output();
-//	t.output();
-//	cout<<endl<<"i P:"<<&i<<endl;
-//	cout<<"t p:"<<&t<<endl;
-//
-//	cout<<t<<endl;
-
-
-
-	int a;
-	cin>>a;
-	cout<<a<<endl;
-
-
-
-
-
-
-//	Zline line;
-//	Zline line1 = line;
-//	display(line);
 
 	return 0;
 }
