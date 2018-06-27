@@ -16,7 +16,8 @@ namespace std
 class EnhancedCurrency1: public currency
 {
 public:
-	EnhancedCurrency1(signType sign=plu,unsigned long dollars=0,unsigned int cents=0);
+	EnhancedCurrency1(signType sign = plu, unsigned long dollars = 0,
+			unsigned int cents = 0);
 	virtual ~EnhancedCurrency1();
 
 	EnhancedCurrency1 operator-(const EnhancedCurrency1&x);
@@ -26,9 +27,12 @@ public:
 
 	friend istream& operator>>(istream& input, EnhancedCurrency1& x)
 	{
-		input>>x.amount;
+		input >> x.amount;
 		return input;
 	}
+
+	void operator=(int x);
+	void operator=(double x);
 };
 
 } /* namespace std */

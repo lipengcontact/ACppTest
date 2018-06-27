@@ -34,9 +34,12 @@ int main()
 {
 	cout << "test " << endl;
 
-	EnhancedCurrency1 cur;
-	cin>>cur;
+	EnhancedCurrency1 cur;cout<<"old p:"<<&cur<<endl;
+	cur=12345;
+	cur = 530.0290;
 	cout<<cur<<endl;
+	cout<<"new p:"<<&cur<<endl;
+
 
 
 

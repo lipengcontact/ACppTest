@@ -49,4 +49,18 @@ EnhancedCurrency1 EnhancedCurrency1::operator /(double x)
 	return cur;
 }
 
+void std::EnhancedCurrency1::operator =(int x)
+{
+	this->amount = x;
+}
+
+void std::EnhancedCurrency1::operator =(double x)
+{
+	if(x>=0)
+		this->amount = (x+0.001)*100;
+	else
+		this->amount = (x-0.001)*100;
+}
+
 } /* namespace std */
+
